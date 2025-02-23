@@ -1,0 +1,63 @@
+# Base URL for the API
+@baseUrl = http://localhost:8080/api
+
+# Authentication Endpoints
+
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin",
+  "role": "HR"
+}
+
+### Login a user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "password": "password123" 
+}
+
+# // newuser password123
+# Resignation Endpoints
+
+### Submit a resignation request
+POST {{baseUrl}}/resignations/submit
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JhZWE4NWZiMmVhODk2YTJkZTUxMjQiLCJpYXQiOjE3NDAzMDQ3MTF9.GRYBVRVx5RwdMGRNCtil0ynW4Bh7eKonp6M99QLkhys
+
+{
+  "intendedLastWorkingDay": "2023-12-04",
+  "reason": "Personal reasons"
+}
+
+### Review a resignation request
+PUT {{baseUrl}}/resignations/review/60c7d7e7d8e7f8e9a9b9c9d9
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "Approved",
+  "exitDate": "2023-12-31"
+}
+
+# Exit Interview Endpoints
+
+### Submit an exit interview
+POST {{baseUrl}}/exit-interviews/submit
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "questions": ["Why are you leaving?"],
+  "answers": ["Better opportunity"]
+}
+
+### Get all exit interviews
+GET {{baseUrl}}/exit-interviews/
+Content-Type: application/json
+Authorization: Bearer {{token}}
