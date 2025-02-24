@@ -4,12 +4,34 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "white", color: "primary.main" }}>
       <Toolbar>
-        <Typography variant="h6">Resignation Management System</Typography>
-        <div style={{ flexGrow: 1 }} />
-        <Button color="inherit" component={Link} to="/login">Login</Button>
-        <Button color="inherit" component={Link} to="/register">Register</Button>
+        <Typography
+          variant="h6"
+          component={Link}
+          to="/"
+          sx={{ textDecoration: "none", color: "primary.main", flexGrow: 1 }}
+        >
+          Resignation Management System
+        </Typography>
+        <Button
+          color="primary"
+          variant="contained"
+          component={Link}
+          to="/login"
+          sx={{ marginX: "5px" }}
+        >
+          Login
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          component={Link}
+          to="/register"
+          sx={{ marginX: "5px" }}
+        >
+          Register
+        </Button>
       </Toolbar>
     </AppBar>
   );

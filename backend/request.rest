@@ -8,9 +8,10 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin",
-  "role": "HR"
+  "username": "username",
+  "password": "password123",
+  "email" : "rouinedexplorer@gmail.com",
+  "role": "Employee"
 }
 
 ### Login a user
@@ -18,8 +19,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "username": "newuser",
-  "password": "password123" 
+  "username": "admin",
+  "password": "admin" 
 }
 
 # // newuser password123
@@ -28,17 +29,23 @@ Content-Type: application/json
 ### Submit a resignation request
 POST {{baseUrl}}/resignations/submit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JhZWE4NWZiMmVhODk2YTJkZTUxMjQiLCJpYXQiOjE3NDAzMDQ3MTF9.GRYBVRVx5RwdMGRNCtil0ynW4Bh7eKonp6M99QLkhys
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2M0NTBlMDc4MTJlMmNlYWRmNzgiLCJpYXQiOjE3NDAzNDAyOTZ9.-9UxtEztVaR4ZC1iLL1jiAy7AIWhI7Izdr08Y80Pf3o
 
 {
   "intendedLastWorkingDay": "2023-12-04",
   "reason": "Personal reasons"
 }
 
-### Review a resignation request
-PUT {{baseUrl}}/resignations/review/60c7d7e7d8e7f8e9a9b9c9d9
+### see all resignation request
+GET {{baseUrl}}/resignations/all
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg
+
+
+### Review a resignation request
+PUT {{baseUrl}}/resignations/review/67bb7f250efc14ba4d13f3b7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg
 
 {
   "status": "Approved",
@@ -50,7 +57,7 @@ Authorization: Bearer {{token}}
 ### Submit an exit interview
 POST {{baseUrl}}/exit-interviews/submit
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2M0NTBlMDc4MTJlMmNlYWRmNzgiLCJpYXQiOjE3NDAzNDAyOTZ9.-9UxtEztVaR4ZC1iLL1jiAy7AIWhI7Izdr08Y80Pf3o
 
 {
   "questions": ["Why are you leaving?"],
@@ -60,4 +67,4 @@ Authorization: Bearer {{token}}
 ### Get all exit interviews
 GET {{baseUrl}}/exit-interviews/
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg

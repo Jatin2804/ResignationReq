@@ -8,11 +8,10 @@ exports.register = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 exports.login = async (req, res) => {
   try {
-    const token = await authService.login(req.body);
-    res.json({ token });
+    const authResponse = await authService.login(req.body);
+    res.json({ token: authResponse.token, role: authResponse.role });
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
