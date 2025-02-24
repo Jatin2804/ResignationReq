@@ -6,7 +6,7 @@ import ExitInterviewForm from "../Forms/ExitInterviewForm"
 function EmployeeDashboard() {
   return (
     <Container>
-      <Typography variant="h4">Employee Dashboard</Typography>
+      <Typography variant="h4" sx={{color:"white",margin:"20px",textAlign:"center"}}>Employee Dashboard</Typography>
      
       <ResignationForm/>
       <ExitInterviewForm/>

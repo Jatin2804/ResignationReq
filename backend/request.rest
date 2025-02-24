@@ -4,7 +4,7 @@
 # Authentication Endpoints
 
 ### Register a new user
-POST https://resignationreq.onrender.com/api/auth/register
+POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ GET {{baseUrl}}/resignations/all
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg
 ###
-GET http://localhost:8080/api/resignations/status
+GET {{baseUrl}}/resignations/status
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjMGI5NDkzYWQ3NWEwZWZhYWNkMTMiLCJpYXQiOjE3NDAzODAwNzl9.yIEKHkxEoWBWrT8IiaJNKyZKmL5sNl56yd8MmZjVwTw
 

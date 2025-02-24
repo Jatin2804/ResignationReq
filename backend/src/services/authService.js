@@ -33,6 +33,6 @@ exports.login = async ({ username, password }) => {
   await user.save();
 
   
-  return { token, role: user.role };
+  return { token, role: user.role ,data:user};
 };
 
