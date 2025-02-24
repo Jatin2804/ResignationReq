@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Paper, CircularProgress, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login({ history }) {
+function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [role, setRole] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,22 +16,22 @@ function Login({ history }) {
     setLoading(true);
 
     try {
-      const response = await axios.post('{{baseUrl}}/auth/login', {
+      const response = await axios.post('https://resignationreq.onrender.com/api/auth/login', {
         username,
         password,
       });
 
-      const { token, role: userRole } = response.data;
-      setRole(userRole);
+      const { token, role } = response.data;
 
-      // Store the token in local storage or a context provider
+      // Store the token in localStorage
       localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
 
       // Redirect based on role
-      if (userRole === 'HR') {
-        history.push('/hr');
+      if (role === 'HR') {
+        navigate('/hr');
       } else {
-        history.push('/employee');
+        navigate('/employee');
       }
     } catch (error) {
       setError(error.response?.data?.error || 'Login failed. Please try again.');

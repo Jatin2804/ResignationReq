@@ -7,7 +7,7 @@ function EmployeeDashboard() {
   return (
     <Container>
       <Typography variant="h4">Employee Dashboard</Typography>
-      {/* Add components for submitting resignations and exit interviews */}
+     
       <ResignationForm/>
       <ExitInterviewForm/>
     </Container>

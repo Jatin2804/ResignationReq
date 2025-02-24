@@ -1,7 +1,7 @@
 const Resignation = require('../models/Resignation');
 const { sendEmail } = require('./emailService');
 const { isHoliday } = require('../utils/calendarHelper');
-const User = require('../models/User'); 
+const User = require('../models/User');
 
 exports.submitResignation = async (employeeId, data) => {
   const { intendedLastWorkingDay, reason } = data;
@@ -15,7 +15,7 @@ exports.submitResignation = async (employeeId, data) => {
     throw new Error('Intended last working day is a holiday or weekend.');
   }
 
-  console.log(" Date is valid, proceeding with resignation submission.");
+  console.log("Date is valid, proceeding with resignation submission.");
 
   const resignation = new Resignation({
     employee: employeeId,
@@ -25,10 +25,23 @@ exports.submitResignation = async (employeeId, data) => {
 
   await resignation.save();
 
-  
   const employee = await User.findById(employeeId);
   if (employee && employee.email) {
-    await sendEmail(employee.email, 'New Resignation Request', `Employee ${employeeId} has submitted a resignation request.`);
+    const emailContent = `
+      Dear HR,
+
+      Employee ${employee.username} (ID: ${employeeId}) has submitted a resignation request.
+
+      - Intended Last Working Day: ${intendedLastWorkingDay}
+      - Reason: ${reason}
+
+      Please review and process this request accordingly. You can visit the application here:
+      https://resignationio.vercel.app/login
+
+      Best regards,
+      Resignation System
+    `;
+    await sendEmail(employee.email, 'New Resignation Request', emailContent);
     console.log("Email notification sent.");
   } else {
     console.log("Error: Employee email not found.");
@@ -50,15 +63,26 @@ exports.reviewResignation = async (resignationId, data) => {
   // Fetch the employee's email to send the notification
   const employee = await User.findById(resignation.employee);
   if (employee && employee.email) {
-    await sendEmail(employee.email, 'Resignation Status Update', `Your resignation request has been ${status}.`);
+    const emailContent = `
+      Dear ${employee.username},
+
+      Your resignation request has been ${status}.
+
+      - Exit Date: ${exitDate}
+
+      Please acknowledge this update and complete any necessary exit procedures. You can visit the application here:
+      https://resignationio.vercel.app/login
+
+      Best regards,
+      HR Department
+    `;
+    await sendEmail(employee.email, 'Resignation Status Update', emailContent);
   } else {
-    console.log(" Error: Employee email not found.");
+    console.log("Error: Employee email not found.");
   }
 
   return resignation;
 };
-
-
 
 // Service method to fetch all resignations
 exports.getAllResignations = async () => {
@@ -70,3 +94,11 @@ exports.getAllResignations = async () => {
   }
 };
 
+exports.getResignationsByEmployer = async (employeeId) => {
+  try {
+    const resignations = await Resignation.find({ employee: employeeId }, 'intendedLastWorkingDay reason status exitDate');
+    return resignations;
+  } catch (error) {
+    throw new Error('Error fetching resignations by employer ID.');
+  }
+};

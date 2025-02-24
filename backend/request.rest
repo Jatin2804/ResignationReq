@@ -1,16 +1,16 @@
 # Base URL for the API
-@baseUrl = http://localhost:8080/api
+@baseUrl = https://resignationreq.onrender.com/api
 
 # Authentication Endpoints
 
 ### Register a new user
-POST {{baseUrl}}/auth/register
+POST https://resignationreq.onrender.com/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "username",
-  "password": "password123",
-  "email" : "rouinedexplorer@gmail.com",
+  "username": "admin",
+  "password": "admin",
+  "email" : "randomwork7689@gmail.com",
   "role": "Employee"
 }
 
@@ -29,10 +29,10 @@ Content-Type: application/json
 ### Submit a resignation request
 POST {{baseUrl}}/resignations/submit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2M0NTBlMDc4MTJlMmNlYWRmNzgiLCJpYXQiOjE3NDAzNDAyOTZ9.-9UxtEztVaR4ZC1iLL1jiAy7AIWhI7Izdr08Y80Pf3o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjMGI5NDkzYWQ3NWEwZWZhYWNkMTMiLCJpYXQiOjE3NDAzODAwNzl9.yIEKHkxEoWBWrT8IiaJNKyZKmL5sNl56yd8MmZjVwTw
 
 {
-  "intendedLastWorkingDay": "2023-12-04",
+  "intendedLastWorkingDay": "2023-12-18",
   "reason": "Personal reasons"
 }
 
@@ -40,12 +40,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2M0N
 GET {{baseUrl}}/resignations/all
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg
+###
+GET http://localhost:8080/api/resignations/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjMGI5NDkzYWQ3NWEwZWZhYWNkMTMiLCJpYXQiOjE3NDAzODAwNzl9.yIEKHkxEoWBWrT8IiaJNKyZKmL5sNl56yd8MmZjVwTw
 
 
 ### Review a resignation request
-PUT {{baseUrl}}/resignations/review/67bb7f250efc14ba4d13f3b7
+PUT {{baseUrl}}/resignations/review/67bc17f5614b6513e994165e
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JiN2JkYzBlMDc4MTJlMmNlYWRmNzMiLCJpYXQiOjE3NDAzNDE4MDF9.HfKkL6Gq8MAPsrgTttk2xEKG-KwwVVslnWNXbI67cAg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjMGQwMjkzYWQ3NWEwZWZhYWNkMWQiLCJpYXQiOjE3NDAzODAyNjZ9.N-K8SqSEwlrwDZNbgHZBmll0dBBC-VyR85qWxvCSdu4
 
 {
   "status": "Approved",

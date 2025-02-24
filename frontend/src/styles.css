@@ -1,7 +1,11 @@
 body {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background: linear-gradient(to bottom right, #004865, #0a6780, #128099);
     margin: 0;
     padding: 0;
+ 
+      min-height: 100vh;
+    
+    
   }
   

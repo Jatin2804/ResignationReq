@@ -29,3 +29,13 @@ exports.getAllResignations = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getResignationsByEmployer = async (req, res) => {
+  try {
+    const resignations = await resignationService.getResignationsByEmployer(req.user.id);
+    res.json(resignations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+

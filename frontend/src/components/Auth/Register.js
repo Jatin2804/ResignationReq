@@ -1,30 +1,53 @@
-import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Paper, CircularProgress, Box, Link, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import axios from 'axios';
+import React, { useState } from "react";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  CircularProgress,
+  Box,
+  Link,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Register({ history }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Employee');
-  const [error, setError] = useState('');
+function Register() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Employee");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
+
+    // Validation: Ensure all fields are filled
+    if (!username || !password || !email || !role) {
+      setError("All fields are required.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await axios.post('{{baseUrl}}/auth/register', {
+      await axios.post("https://resignationreq.onrender.com/api/auth/register", {
         username,
         password,
         email,
         role,
       });
-      history.push('/login');
+
+      navigate("/login");
     } catch (error) {
-      setError(error.response?.data?.error || 'Registration failed. Please try again.');
+      setError(error.response?.data?.error || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -32,7 +55,15 @@ function Register({ history }) {
 
   return (
     <Container maxWidth="sm">
-      <Paper style={{ padding: '20px', marginTop: '50px' }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          mt: 6,
+          borderRadius: 2,
+          backgroundColor: "white",
+        }}
+      >
         <Typography variant="h5" gutterBottom>
           Register
         </Typography>
@@ -64,19 +95,18 @@ function Register({ history }) {
             required
           />
           <FormControl fullWidth margin="normal">
-            <InputLabel>Role</InputLabel>
+            <InputLabel id="role-label">Role</InputLabel>
             <Select
+              labelId="role-label"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              label="Role"
-              required
             >
               <MenuItem value="Employee">Employee</MenuItem>
               <MenuItem value="HR">HR</MenuItem>
             </Select>
           </FormControl>
           {error && (
-            <Typography color="error" variant="body2" style={{ marginTop: '10px' }}>
+            <Typography color="error" variant="body2" sx={{ mt: 1 }}>
               {error}
             </Typography>
           )}
@@ -88,7 +118,7 @@ function Register({ history }) {
               fullWidth
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : 'Register'}
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Register"}
             </Button>
           </Box>
         </form>
